@@ -17,7 +17,6 @@ function App() {
 
     return (
         <div className='App'>
-
             <div className='countBlock' >
                 <Count count={count} />
             </div>
@@ -28,7 +27,6 @@ function App() {
                         disable={count < 1}/>
             </div>
         </div>
-
     );
 }
 
