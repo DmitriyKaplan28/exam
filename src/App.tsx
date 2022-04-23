@@ -22,9 +22,9 @@ function App() {
             </div>
             <div className='buttonBlock'>
                 <Button className={count < 5 ? '' : 'disabledButton'} name={'+1'} callBack={plusOne}
-                        disable={count > 4}/>
+                        disable={count === 5}/>
                 <Button className={count < 1 ? 'disabledButton' : ''} name={'reset'} callBack={reset}
-                        disable={count < 1}/>
+                        disable={count === 0}/>
             </div>
         </div>
     );
