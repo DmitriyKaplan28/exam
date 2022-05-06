@@ -4,7 +4,7 @@ type CountType = {
     count: number
 }
 
-export const Count = (props: CountType) => {
+export const Counter = (props: CountType) => {
   return (
       <div>{props.count}</div>
   );
