@@ -25,7 +25,6 @@ function App() {
     const reset = () => {
         setCount(0)
     }
-
     return (
         <div className='App'>
             <div className='countBlock'>
