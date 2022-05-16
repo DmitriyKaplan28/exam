@@ -8,7 +8,6 @@ export const Counter = (props: CountType) => {
     return (
         <div>
             <div>{props.count}</div>
-            <div><input /></div>
         </div>
     );
 }
