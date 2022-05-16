@@ -6,13 +6,13 @@ type SetCounterRangeType = {
     //count: number
 
 }
-const [min, setMin] = useState(0)
-const [max, setMax] = useState<number>(5)
+/*const [min, setMin] = useState(0)
+const [max, setMax] = useState<number>(5)*/
 
 export const SetCounterRange = (props: SetCounterRangeType) => {
 
     const onMinInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-        setMin(event.currentTarget.value)
+        //setMin(event.currentTarget.value)
     }
     return (
         <div>
@@ -21,17 +21,12 @@ export const SetCounterRange = (props: SetCounterRangeType) => {
                     max value:
                     <input size={5}
                            onChange={onMinInputChange}
-                           value={min}/>
-                    <Button className={''}
-                            name={'+'}
-                            callBack={() => {
-                            }}
-                    />
+                           /*value={min}*//>
                 </div>
                 <div className={s.input}>
                     min value:
                     <input size={5}
-                           value={max}/>
+                           /*value={max}*//>
                 </div>
             </div>
             <div className={s.buttonBlock}>
