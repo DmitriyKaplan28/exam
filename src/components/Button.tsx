@@ -5,7 +5,7 @@ type ButtonPropsType = {
     name: string,
     callBack: () => void
     className: string
-    disable: boolean
+    disable?: boolean
 }
 
 export const Button = (props: ButtonPropsType) => {

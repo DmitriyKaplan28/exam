@@ -1,0 +1,29 @@
+.inputBlock {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 1rem auto;
+    width: 12rem;
+    height: 8rem;
+    border: 0.1rem solid green;
+    border-radius: 0.5rem;
+}
+
+.input {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 4px;
+}
+
+
+.buttonBlock {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem auto;
+    width: 12rem;
+    height: 8rem;
+    border: 0.1rem solid green;
+    border-radius: 0.5rem;
+}
