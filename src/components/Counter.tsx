@@ -5,7 +5,10 @@ type CountType = {
 }
 
 export const Counter = (props: CountType) => {
-  return (
-      <div>{props.count}</div>
-  );
+    return (
+        <div>
+            <div>{props.count}</div>
+            <div><input /></div>
+        </div>
+    );
 }
