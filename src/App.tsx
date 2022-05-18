@@ -61,7 +61,9 @@ function App() {
             <div className='App'>
                 <SetCounterRange minOnChangeHandler={minOnChangeHandler}
                                  maxOnChangeHandler={maxOnChangeHandler}
-                                 onClickHandler={onSetHandler}/>
+                                 onClickHandler={onSetHandler}
+                                 minValue={min}
+                                 maxValue={max}/>
             </div>
             <div className='App'>
                 <div className='countBlock'>
