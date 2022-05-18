@@ -6,6 +6,8 @@ import {SetCounterRange} from "./components/SetCounterRange";
 
 function App() {
     const [count, setCount] = useState<number>(0);
+    const [min, setMin] = useState(0)
+    const [max, setMax] = useState<number>(5)
     useEffect(() => {
         let countAsString = localStorage.getItem('currentValue')
         if (countAsString) {
@@ -17,36 +19,43 @@ function App() {
         localStorage.setItem('currentValue', JSON.stringify(count))
     }, [count])
 
-
-
-    const onInputChange = (e:number) => {
-
-    }
-
     const plusOne = () => {
-        setCount(count + 1)
+        setCount(min + 1)
     };
     const reset = () => {
-        setCount(0)
+        setCount(min)
     }
+
+
+
+    const minOnChangeHandler = (newCounterMin: number) => {
+        setMin(newCounterMin)
+        console.log(min)
+    }
+    const maxOnChangeHandler = (newCounterMax: number) => {
+        setMax(newCounterMax)
+        console.log(max)
+    }
+
     return (
         <div className='wrapper'>
             <div className='App'>
-                <SetCounterRange />
+                <SetCounterRange minOnChangeHandler={minOnChangeHandler}
+                                 maxOnChangeHandler={maxOnChangeHandler}/>
             </div>
             <div className='App'>
                 <div className='countBlock'>
                     <Counter count={count}/>
                 </div>
                 <div className='buttonBlock'>
-                    <Button className={count < 5 ? '' : 'disabledButton'}
+                    <Button className={count < max ? '' : 'disabledButton'}
                             name={'+1'}
                             callBack={plusOne}
-                            disable={count === 5}/>
-                    <Button className={count < 1 ? 'disabledButton' : ''}
+                            disable={count === max}/>
+                    <Button className={count === min ? 'disabledButton' : ''}
                             name={'reset'}
                             callBack={reset}
-                            disable={count === 0}/>
+                            disable={count === min}/>
                 </div>
             </div>
         </div>
