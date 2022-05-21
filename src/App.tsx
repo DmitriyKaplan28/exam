@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css';
 import {Button} from "./components/Button";
 import {Counter} from "./components/Counter";
@@ -10,6 +10,8 @@ function App() {
 
     const [count, setCount] = useState<number>(min);
 
+    const [disabled, setDisabled] = useState<boolean>(true)
+    const [error, setError] = useState<boolean>(false)
 
     useEffect(() => {
         let countAsString = localStorage.getItem('currentValue')
@@ -40,18 +42,19 @@ function App() {
     }
 
     const minOnChangeHandler = (value: number) => {
-        setMin(value)
-        console.log(min)
+        setDisabled(false);
+        setMin(value);
     }
     const maxOnChangeHandler = (value: number) => {
-        setMax(value)
-        console.log(max)
+        setMax(value);
+        setDisabled(false);
     }
     const onSetHandler = () => {
-        localStorage.setItem('currentValue', JSON.stringify(min))
-        localStorage.setItem('currentMin', JSON.stringify(min))
-        localStorage.setItem('currentMax', JSON.stringify(max))
-        setCount(count)
+        localStorage.setItem('currentValue', JSON.stringify(min));
+        localStorage.setItem('currentMin', JSON.stringify(min));
+        localStorage.setItem('currentMax', JSON.stringify(max));
+        setCount(min);
+        setDisabled(!disabled);
     }
 
     return (
@@ -61,11 +64,12 @@ function App() {
                                  maxOnChangeHandler={maxOnChangeHandler}
                                  onClickHandler={onSetHandler}
                                  minValue={min}
-                                 maxValue={max}/>
+                                 maxValue={max}
+                                 disable={disabled}/>
             </div>
             <div className='App'>
                 <div className='countBlock'>
-                    <Counter count={count}/>
+                    <Counter count={disabled && !error ? count : 'Enter correct range'}/>
                 </div>
                 <div className='buttonBlock'>
                     <Button className={count < max ? '' : 'disabledButton'}

@@ -8,6 +8,7 @@ type SetCounterRangeType = {
     onClickHandler: () => void
     minValue: number
     maxValue: number
+    disable: boolean
 }
 
 
@@ -47,6 +48,7 @@ export const SetCounterRange = (props: SetCounterRangeType) => {
                 <Button className={''}
                         name={'Set'}
                         callBack={onClickHandler}
+                        disable={props.disable}
                 />
             </div>
         </div>

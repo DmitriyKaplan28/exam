@@ -1,7 +1,7 @@
 import React from 'react';
 
 type CountType = {
-    count: number
+    count: number | string
 }
 
 export const Counter = (props: CountType) => {
