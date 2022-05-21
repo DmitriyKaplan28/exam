@@ -42,12 +42,17 @@ function App() {
     }
 
     const minOnChangeHandler = (value: number) => {
-        setDisabled(false);
         setMin(value);
+        if (min >= 0 && max > 0 && max > min) {
+            setDisabled(false)
+        } else {setDisabled(true)};
+
     }
     const maxOnChangeHandler = (value: number) => {
         setMax(value);
-        setDisabled(false);
+        if (min >= 0 && max > 0 && max > min) {
+            setDisabled(false)
+        } else {setDisabled(true)};
     }
     const onSetHandler = () => {
         localStorage.setItem('currentValue', JSON.stringify(min));
