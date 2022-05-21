@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useEffect, useState} from 'react';
+import React, { useEffect, useState} from 'react';
 import './App.css';
 import {Button} from "./components/Button";
 import {Counter} from "./components/Counter";
@@ -25,13 +25,11 @@ function App() {
         let maxAsString = localStorage.getItem('currentMax')
         if (maxAsString) {
             let newMax = JSON.parse(maxAsString);
-            setMin(newMax)
+            setMax(newMax)
         }
     }, [])
     useEffect(() => {
         localStorage.setItem('currentValue', JSON.stringify(count))
-        /*localStorage.setItem('currentMin', JSON.stringify(min))
-        localStorage.setItem('currentMax', JSON.stringify(max))*/
     })
 
     const plusOne = () => {
