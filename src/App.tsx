@@ -50,7 +50,7 @@ function App() {
     }
     const maxOnChangeHandler = (value: number) => {
         setMax(value);
-        if (min >= 0 && max > 0 && max > min) {
+        if (min >= 0 || max > 0 || max > min) {
             setDisabled(false)
         } else {setDisabled(true)};
     }
