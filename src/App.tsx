@@ -34,6 +34,12 @@ function App() {
         localStorage.setItem('currentValue', JSON.stringify(count))
     })
 
+    useEffect(()=>{
+        if (min >= 0 && max > 0 && max > min) {//
+            setDisabled(false)
+        } else {setDisabled(true)};
+    },[min, max])
+
     const plusOne = () => {
         setCount(count + 1)
     };
@@ -43,16 +49,9 @@ function App() {
 
     const minOnChangeHandler = (value: number) => {
         setMin(value);
-        if (min >= 0 && max > 0 && max > min) {
-            setDisabled(false)
-        } else {setDisabled(true)};
-
     }
     const maxOnChangeHandler = (value: number) => {
         setMax(value);
-        if (min >= 0 || max > 0 || max > min) {
-            setDisabled(false)
-        } else {setDisabled(true)};
     }
     const onSetHandler = () => {
         localStorage.setItem('currentValue', JSON.stringify(min));
@@ -80,11 +79,11 @@ function App() {
                     <Button className={count < max ? '' : 'disabledButton'}
                             name={'+1'}
                             callBack={plusOne}
-                            disable={count === max}/>
+                            disable={count === max && min >= 0 && max > 0 && max > min}/>
                     <Button className={count === min ? 'disabledButton' : ''}
                             name={'reset'}
                             callBack={reset}
-                            disable={count === min}/>
+                            disable={count === min && min >= 0 && max > 0 && max > min}/>
                 </div>
             </div>
         </div>

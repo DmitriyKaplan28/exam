@@ -17,7 +17,6 @@ export const SetCounterRange = (props: SetCounterRangeType) => {
 
     const minOnChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         props.minOnChangeHandler(+e.currentTarget.value)
-        debugger
     }
     const maxOnChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         props.maxOnChangeHandler(+e.currentTarget.value)
