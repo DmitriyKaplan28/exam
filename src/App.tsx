@@ -8,12 +8,12 @@ function App() {
     const [min, setMin] = useState<number>(0)
     const [max, setMax] = useState<number>(5)
 
-    const [count, setCount] = useState<number>(min);
+    const [count, setCount] = useState<number | 'Enter correct range'>(min);
 
-    const [disabled, setDisabled] = useState<boolean>(false)
+    const [disabledSet, setDisabledSet] = useState<boolean>(false)
     const [error, setError] = useState<boolean>(false)
 
-    const [settings, setSettings] = useState<boolean>(true)
+    //const [settings, setSettings] = useState<boolean>(true)
 
     useEffect(() => {
         let countAsString = localStorage.getItem('currentValue')
@@ -38,16 +38,18 @@ function App() {
 
     useEffect(() => {
         if (min >= 0 && max > 0 && max > min) {//
-            setDisabled(false)
+            setDisabledSet(false)
             setError(false)
         } else {
-            setDisabled(true)
+            setDisabledSet(true)
             setError(true)
+            setCount('Enter correct range')
         }
         ;
     }, [min, max])
 
     const plusOne = () => {
+        // @ts-ignore
         setCount(count + 1)
     };
     const reset = () => {
@@ -56,9 +58,9 @@ function App() {
 
     const minOnChangeHandler = (value: number) => {
         setMin(value);
-        /* console.log(disabled)
+        /* console.log(disabledSet)
          console.log(error)*/
-        console.log(disabled || error)
+        console.log(disabledSet || !!error)
     }
     const maxOnChangeHandler = (value: number) => {
         setMax(value);
@@ -68,46 +70,41 @@ function App() {
         localStorage.setItem('currentMin', JSON.stringify(min));
         localStorage.setItem('currentMax', JSON.stringify(max));
         setCount(min);
-        setDisabled(true);
-        setSettings(false)
-        console.log(disabled)
+        setDisabledSet(true);
+        //setSettings(false)
+        console.log(disabledSet)
     }
-    const goToSettingsHandler = () => {
+    /*const goToSettingsHandler = () => {
         setSettings(true)
         setDisabled(false)
-    }
+    }*/
 
     return (
         <div className='wrapper'>
-            {settings ?
+
                 <div className='App'>
                     <SetCounterRange minOnChangeHandler={minOnChangeHandler}
                                      maxOnChangeHandler={maxOnChangeHandler}
                                      onClickHandler={onSetHandler}
                                      minValue={min}
                                      maxValue={max}
-                                     disable={disabled}/>
-                </div> :
+                                     disable={disabledSet}/>
+                </div>
                 <div className='App'>
                     <div className='countBlock'>
-                        <Counter count={disabled ? count : 'Enter correct range'}/>
+                        <Counter count={disabledSet || !!error ? count : 'Enter correct range'}/>
                     </div>
                     <div className='buttonBlock'>
                         <Button className={count < max ? '' : 'disabledButton'}
                                 name={'+1'}
                                 callBack={plusOne}
-                                disable={count === max || !disabled || error}/>
+                                disable={count === max || !disabledSet || !!error}/>
                         <Button className={count === min ? 'disabledButton' : ''}
                                 name={'reset'}
                                 callBack={reset}
-                                disable={count === min || !disabled || error}/>
-                        <Button className={''}
-                                name={'Go to settings'}
-                                callBack={goToSettingsHandler}
-                                disable={false}/>
+                                disable={count === min || !disabledSet || !!error}/>
                     </div>
                 </div>
-            }
         </div>
     );
 }
