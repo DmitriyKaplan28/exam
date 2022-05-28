@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import s from './App.module.css';
-import {Button} from "./components/Button";
 import {Counter} from "./components/Counter";
 import {SetCounterRange} from "./components/SetCounterRange";
 
@@ -72,44 +71,26 @@ function App() {
         setDisabled(false)
     }*/
 
-    const redValueStyleDisplay = error || count === max ? s.redValueDisplay : undefined
-    const counterClassName = () => {
-        if (error) {
-            return `${redValueStyleDisplay} ${s.display} ${s.incorrectValue}`
-        } else {
-            if (disabledSet) {
-                return `${redValueStyleDisplay} ${s.display}`
-            } else {
-                return `${s.display} ${s.enterValues} `
-            }
-        }
-    }
-
     return (
         <div className= {s.wrapper}>
-
                 <div className={s.App}>
                     <SetCounterRange minOnChangeHandler={minOnChangeHandler}
                                      maxOnChangeHandler={maxOnChangeHandler}
                                      onClickHandler={onSetHandler}
                                      minValue={min}
                                      maxValue={max}
-                                     disable={disabledSet}/>
+                                     disable={disabledSet}
+                    />
                 </div>
                 <div className={s.App}>
-                    <div className={counterClassName()}>
-                        <Counter count={!disabledSet || min < 0  || max <= min ? 'Enter correct range' : count}/>
-                    </div>
-                    <div className={s.buttonsContainer}>
-                        <Button className={s.buttonPlusOne}
-                                name={'+1'}
-                                callBack={plusOne}
-                                disable={count === max || !disabledSet || error}/>
-                        <Button className={ s.buttonReset}
-                                name={'reset'}
-                                callBack={reset}
-                                disable={count === min || !disabledSet || error}/>
-                    </div>
+                        <Counter count={count}
+                                 plusOne={plusOne}
+                                 reset={reset}
+                                 disabledSet={disabledSet}
+                                 error={error}
+                                 min={min}
+                                 max={max}
+                        />
                 </div>
         </div>
     );

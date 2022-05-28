@@ -1,0 +1,62 @@
+.buttonsContainer {
+    height: 30%;
+    border: 5px solid #1e3434;
+    border-radius: 10px;
+    margin: 10px;
+    background-color: #7ca4a4;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.buttonPlusOne {
+    background-color: aquamarine;
+    border: 3px solid #1e3434;
+    border-radius: 10px;
+    width: 130px;
+    height: 60px;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin: 5px;
+}
+
+.buttonReset {
+    background-color: pink;
+    border: 3px solid #1e3434;
+    border-radius: 10px;
+    width: 130px;
+    height: 60px;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin: 5px;
+}
+
+.display {
+    height: 50%;
+    text-align: center;
+    background-color: #7ca4a4;
+    border: 5px solid #1e3434;
+    border-radius: 10px;
+    font-size: 3.5em;
+    color: #1e3434;
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.redValueDisplay {
+    color: red;
+    font-weight: bold;
+}
+
+.enterValues {
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.incorrectValue {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: red;
+}
