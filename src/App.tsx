@@ -40,7 +40,7 @@ function App() {
         if (min < 0  || max <= min) {
             setDisabledSet(true)
             setError(true)
-            setCount('Enter correct range')
+            //setCount('Enter correct range')
         }
     }, [min, max])
 
@@ -73,7 +73,8 @@ function App() {
         setSettings(true)
         setDisabled(false)
     }*/
-
+    console.log(count === max || !disabledSet && error)
+    console.log(true || true && false)
     return (
         <div className='wrapper'>
 
@@ -87,7 +88,7 @@ function App() {
                 </div>
                 <div className='App'>
                     <div className='countBlock'>
-                        <Counter count={disabledSet || error ? count : 'Enter correct range'}/>
+                        <Counter count={!disabledSet || min < 0  || max <= min ? 'Enter correct range' : count}/>
                     </div>
                     <div className='buttonBlock'>
                         <Button className={count < max ? '' : 'disabledButton'}
