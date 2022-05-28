@@ -10,7 +10,7 @@ function App() {
 
     const [count, setCount] = useState<number | 'Enter correct range'>(min);
 
-    const [disabledSet, setDisabledSet] = useState<boolean>(false)
+    const [disabledSet, setDisabledSet] = useState<boolean>(true)
     const [error, setError] = useState<boolean>(false)
 
     //const [settings, setSettings] = useState<boolean>(true)
@@ -37,15 +37,11 @@ function App() {
     })
 
     useEffect(() => {
-        if (min >= 0 && max > 0 && max > min) {//
-            setDisabledSet(false)
-            setError(false)
-        } else {
+        if (min < 0  || max <= min) {
             setDisabledSet(true)
             setError(true)
             setCount('Enter correct range')
         }
-        ;
     }, [min, max])
 
     const plusOne = () => {
@@ -58,12 +54,11 @@ function App() {
 
     const minOnChangeHandler = (value: number) => {
         setMin(value);
-        /* console.log(disabledSet)
-         console.log(error)*/
-        console.log(disabledSet || !!error)
+        setDisabledSet(false)
     }
     const maxOnChangeHandler = (value: number) => {
         setMax(value);
+        setDisabledSet(false)
     }
     const onSetHandler = () => {
         localStorage.setItem('currentValue', JSON.stringify(min));
@@ -72,7 +67,7 @@ function App() {
         setCount(min);
         setDisabledSet(true);
         //setSettings(false)
-        console.log(disabledSet)
+
     }
     /*const goToSettingsHandler = () => {
         setSettings(true)
@@ -92,17 +87,17 @@ function App() {
                 </div>
                 <div className='App'>
                     <div className='countBlock'>
-                        <Counter count={disabledSet || !!error ? count : 'Enter correct range'}/>
+                        <Counter count={disabledSet || error ? count : 'Enter correct range'}/>
                     </div>
                     <div className='buttonBlock'>
                         <Button className={count < max ? '' : 'disabledButton'}
                                 name={'+1'}
                                 callBack={plusOne}
-                                disable={count === max || !disabledSet || !!error}/>
+                                disable={count === max || !disabledSet || error}/>
                         <Button className={count === min ? 'disabledButton' : ''}
                                 name={'reset'}
                                 callBack={reset}
-                                disable={count === min || !disabledSet || !!error}/>
+                                disable={count === min || !disabledSet || error}/>
                     </div>
                 </div>
         </div>
