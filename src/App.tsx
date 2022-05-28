@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import './App.css';
+import s from './App.module.css';
 import {Button} from "./components/Button";
 import {Counter} from "./components/Counter";
 import {SetCounterRange} from "./components/SetCounterRange";
@@ -8,7 +8,7 @@ function App() {
     const [min, setMin] = useState<number>(0)
     const [max, setMax] = useState<number>(5)
 
-    const [count, setCount] = useState<number | 'Enter correct range'>(min);
+    const [count, setCount] = useState<number>(min);
 
     const [disabledSet, setDisabledSet] = useState<boolean>(true)
     const [error, setError] = useState<boolean>(false)
@@ -40,12 +40,10 @@ function App() {
         if (min < 0  || max <= min) {
             setDisabledSet(true)
             setError(true)
-            //setCount('Enter correct range')
         }
     }, [min, max])
 
     const plusOne = () => {
-        // @ts-ignore
         setCount(count + 1)
     };
     const reset = () => {
@@ -73,12 +71,24 @@ function App() {
         setSettings(true)
         setDisabled(false)
     }*/
-    console.log(count === max || !disabledSet && error)
-    console.log(true || true && false)
-    return (
-        <div className='wrapper'>
 
-                <div className='App'>
+    const redValueStyleDisplay = error || count === max ? s.redValueDisplay : undefined
+    const counterClassName = () => {
+        if (error) {
+            return `${redValueStyleDisplay} ${s.display} ${s.incorrectValue}`
+        } else {
+            if (disabledSet) {
+                return `${redValueStyleDisplay} ${s.display}`
+            } else {
+                return `${s.display} ${s.enterValues} `
+            }
+        }
+    }
+
+    return (
+        <div className= {s.wrapper}>
+
+                <div className={s.App}>
                     <SetCounterRange minOnChangeHandler={minOnChangeHandler}
                                      maxOnChangeHandler={maxOnChangeHandler}
                                      onClickHandler={onSetHandler}
@@ -86,16 +96,16 @@ function App() {
                                      maxValue={max}
                                      disable={disabledSet}/>
                 </div>
-                <div className='App'>
-                    <div className='countBlock'>
+                <div className={s.App}>
+                    <div className={counterClassName()}>
                         <Counter count={!disabledSet || min < 0  || max <= min ? 'Enter correct range' : count}/>
                     </div>
-                    <div className='buttonBlock'>
-                        <Button className={count < max ? '' : 'disabledButton'}
+                    <div className={s.buttonsContainer}>
+                        <Button className={s.buttonPlusOne}
                                 name={'+1'}
                                 callBack={plusOne}
                                 disable={count === max || !disabledSet || error}/>
-                        <Button className={count === min ? 'disabledButton' : ''}
+                        <Button className={ s.buttonReset}
                                 name={'reset'}
                                 callBack={reset}
                                 disable={count === min || !disabledSet || error}/>

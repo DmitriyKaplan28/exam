@@ -1,29 +1,56 @@
+.buttonsContainer {
+    height: 30%;
+    border: 5px solid #1e3434;
+    border-radius: 10px;
+    margin: 10px;
+    background-color: #7ca4a4;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.buttonSet {
+    background-color: #606368;
+    border: 3px solid rgba(2, 3, 3, 0);
+    border-radius: 10px;
+    width: 130px;
+    height: 60px;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin: 5px;
+}
 .inputBlock {
+    height: 130px;
+    text-align: center;
+    background-color: #7ca4a4;
+    color: #1e3434;
+    border: 5px solid #1e3434;
+    border-radius: 10px;
+    font-size: x-large;
+    font-weight: bold;
+    margin: 10px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    margin: 1rem auto;
-    width: 12rem;
-    height: 8rem;
-    /*border: 0.1rem solid green;*/
-    /*border-radius: 0.5rem;*/
+    justify-content: space-evenly;
 }
 
-.input {
+.inputItem {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    margin-top: 4px;
+    justify-content: space-between;
+    margin-left: 5px;
+    margin-right: 5px;
+    height: 30%;
+    font-size: 30px;
 }
 
+.inputArea {
+    font-size: medium;
+    text-align: center;
+    width: 40%;
+    border-radius: 10px;
+}
 
-.buttonBlock {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 1rem auto;
-    width: 12rem;
-    height: 8rem;
-    border: 0.1rem solid green;
-    border-radius: 0.5rem;
+.errorInput {
+    border: 2px solid red;
+    background: pink;
 }

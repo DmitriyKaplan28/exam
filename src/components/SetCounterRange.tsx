@@ -1,4 +1,4 @@
-import React, {ChangeEvent, ChangeEventHandler, useState} from 'react';
+import React, {ChangeEvent} from 'react';
 import {Button} from "./Button";
 import s from './SetCounterRange.module.css'
 
@@ -11,9 +11,7 @@ type SetCounterRangeType = {
     disable: boolean
 }
 
-
 export const SetCounterRange = (props: SetCounterRangeType) => {
-
 
     const minOnChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         props.minOnChangeHandler(+e.currentTarget.value)
@@ -26,26 +24,28 @@ export const SetCounterRange = (props: SetCounterRangeType) => {
         props.onClickHandler()
     }
 
+    const inputErrorStyle = props.minValue < 0 || props.maxValue <= props.minValue ? s.errorInput : ""
+
     return (
         <div>
             <div className={s.inputBlock}>
-                <div className={s.input}>
+                <div className={s.inputItem}>
                     <span>max value:</span>
                     <input type={"number"}
-                           size={5}
                            onChange={maxOnChangeHandler}
-                           value={props.maxValue}/>
+                           value={props.maxValue}
+                           className={`${s.inputArea} ${inputErrorStyle}`}/>
                 </div>
-                <div className={s.input}>
+                <div className={s.inputItem}>
                     <span>min value:</span>
                     <input type={"number"}
-                           size={5}
                            onChange={minOnChangeHandler}
-                           value={props.minValue}/>
+                           value={props.minValue}
+                           className={`${s.inputArea} ${inputErrorStyle}`}/>
                 </div>
             </div>
-            <div className={s.buttonBlock}>
-                <Button className={''}
+            <div className={s.buttonsContainer}>
+                <Button className={s.buttonSet}
                         name={'Set'}
                         callBack={onClickHandler}
                         disable={props.disable}

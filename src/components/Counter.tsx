@@ -6,8 +6,6 @@ type CountType = {
 
 export const Counter = (props: CountType) => {
     return (
-        <div>
-            <div>{props.count}</div>
-        </div>
+        <div>{props.count}</div>
     );
 }
