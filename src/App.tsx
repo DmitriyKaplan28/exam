@@ -63,6 +63,8 @@ function App() {
         localStorage.setItem('currentMax', JSON.stringify(max));
         setCount(min);
         setDisabledSet(true);
+        setError(false)
+        console.log(error)
         //setSettings(false)
 
     }
