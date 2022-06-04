@@ -12,8 +12,6 @@ function App() {
     const [disabledSet, setDisabledSet] = useState<boolean>(true)
     const [error, setError] = useState<boolean>(false)
 
-    //const [settings, setSettings] = useState<boolean>(true)
-
     useEffect(() => {
         let countAsString = localStorage.getItem('currentValue')
         if (countAsString) {
@@ -65,13 +63,7 @@ function App() {
         setDisabledSet(true);
         setError(false)
         console.log(error)
-        //setSettings(false)
-
     }
-    /*const goToSettingsHandler = () => {
-        setSettings(true)
-        setDisabled(false)
-    }*/
 
     return (
         <div className= {s.wrapper}>
