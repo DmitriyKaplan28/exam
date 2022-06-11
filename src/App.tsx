@@ -1,68 +1,42 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import s from './App.module.css';
 import {Counter} from "./components/Counter";
 import {SetCounterRange} from "./components/SetCounterRange";
+import {RootStateType} from "./bll/store";
+import {InitialCounterStateType, plusOneAC, resetAC} from "./bll/counter-reducer";
+import {InitialSettingsStateType, maxChangeAC, minChangeAC, setDisabledSetAndErrorAC} from "./bll/settings-reducer";
 
 function App() {
-    const [min, setMin] = useState<number>(0)
-    const [max, setMax] = useState<number>(5)
 
-    const [count, setCount] = useState<number>(min);
+    const counter = useSelector<RootStateType, InitialCounterStateType>(state => state.counter)
+    const settings = useSelector<RootStateType, InitialSettingsStateType>(state => state.settings)
 
-    const [disabledSet, setDisabledSet] = useState<boolean>(true)
-    const [error, setError] = useState<boolean>(false)
-
-    useEffect(() => {
-        let countAsString = localStorage.getItem('currentValue')
-        if (countAsString) {
-            let newCount = JSON.parse(countAsString);
-            setCount(newCount)
-        }
-        let minAsString = localStorage.getItem('currentMin')
-        if (minAsString) {
-            let newMin = JSON.parse(minAsString);
-            setMin(newMin)
-        }
-        let maxAsString = localStorage.getItem('currentMax')
-        if (maxAsString) {
-            let newMax = JSON.parse(maxAsString);
-            setMax(newMax)
-        }
-    }, [])
-    useEffect(() => {
-        localStorage.setItem('currentValue', JSON.stringify(count))
-    })
-
-    useEffect(() => {
-        if (min < 0 || max <= min) {
-            setDisabledSet(true)
-            setError(true)
-        }
-    }, [min, max])
-
-    const plusOne = () => {
-        setCount(count + 1)
-    };
-    const reset = () => {
-        setCount(min)
-    }
+    const dispatch = useDispatch()
 
     const minOnChangeHandler = (value: number) => {
-        setMin(value);
-        setDisabledSet(false)
+        dispatch(minChangeAC(value, false));
     }
     const maxOnChangeHandler = (value: number) => {
-        setMax(value);
-        setDisabledSet(false)
+        dispatch(maxChangeAC(value, false));
     }
+
     const onSetHandler = () => {
-        localStorage.setItem('currentValue', JSON.stringify(min));
-        localStorage.setItem('currentMin', JSON.stringify(min));
-        localStorage.setItem('currentMax', JSON.stringify(max));
-        setCount(min);
-        setDisabledSet(true);
-        setError(false)
-        console.log(error)
+        dispatch(setDisabledSetAndErrorAC(true, false))
+    }
+
+    useEffect(() => {
+        if (settings.min < 0 || settings.max <= settings.min) {
+            dispatch(setDisabledSetAndErrorAC(true, true))
+        }
+    }, [settings.min, settings.max])
+
+    const plusOne = () => {
+        dispatch(plusOneAC())
+    };
+
+    const reset = () => {
+        dispatch(resetAC(settings.min))
     }
 
     return (
@@ -71,19 +45,19 @@ function App() {
                 <SetCounterRange minOnChangeHandler={minOnChangeHandler}
                                  maxOnChangeHandler={maxOnChangeHandler}
                                  onClickHandler={onSetHandler}
-                                 minValue={min}
-                                 maxValue={max}
-                                 disable={disabledSet}
+                                 minValue={settings.min}
+                                 maxValue={settings.max}
+                                 disable={settings.disabledSet}
                 />
             </div>
             <div className={s.App}>
-                <Counter count={count}
+                <Counter count={counter.count}
                          plusOne={plusOne}
                          reset={reset}
-                         disabledSet={disabledSet}
-                         error={error}
-                         min={min}
-                         max={max}
+                         disabledSet={settings.disabledSet}
+                         error={settings.error}
+                         min={settings.min}
+                         max={settings.max}
                 />
             </div>
         </div>

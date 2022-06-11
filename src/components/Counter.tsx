@@ -2,7 +2,7 @@ import React from 'react';
 import s from './Counter.module.css';
 import {Button} from "./Button";
 
-type CountType = {
+export type CountType = {
     count: number | string
     plusOne: () => void
     reset: () => void

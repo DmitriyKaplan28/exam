@@ -5,7 +5,7 @@ export type SetCountFromLocalStorageAT = ReturnType<typeof setCountFromLocalStor
 export type ResetAT = ReturnType<typeof resetAC>
 
 
-type InitialStateType = {
+export type InitialCounterStateType = {
     count: number
 }
 
@@ -13,14 +13,16 @@ let initialState = {
     count: 0
 }
 
-export const counterReducer = (state: InitialStateType = initialState, action: ActionTypes): InitialStateType => {
+export const counterReducer = (state: InitialCounterStateType = initialState, action: ActionTypes): InitialCounterStateType => {
     switch (action.type) {
         case 'PLUS_ONE':
             return {...state, count: state.count + 1}
         case 'SET_COUNT_FROM_LOCAL_STORAGE':
             return {...state, count: action.count}
         case 'RESET':
-            return {...state, count: state.count = 0}
+            return {...state, count: action.min}
+        case 'MIN_CHANGE':
+            return {...state, count: action.min}
         default:
             return state;
     }
@@ -32,9 +34,9 @@ export const plusOneAC = () => {
     } as const
 }
 
-export const resetAC = () => {
+export const resetAC = (min: number) => {
     return {
-        type: 'RESET',
+        type: 'RESET', min
     } as const
 }
 
