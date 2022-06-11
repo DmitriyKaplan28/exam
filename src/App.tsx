@@ -34,7 +34,7 @@ function App() {
     })
 
     useEffect(() => {
-        if (min < 0  || max <= min) {
+        if (min < 0 || max <= min) {
             setDisabledSet(true)
             setError(true)
         }
@@ -66,26 +66,26 @@ function App() {
     }
 
     return (
-        <div className= {s.wrapper}>
-                <div className={s.App}>
-                    <SetCounterRange minOnChangeHandler={minOnChangeHandler}
-                                     maxOnChangeHandler={maxOnChangeHandler}
-                                     onClickHandler={onSetHandler}
-                                     minValue={min}
-                                     maxValue={max}
-                                     disable={disabledSet}
-                    />
-                </div>
-                <div className={s.App}>
-                        <Counter count={count}
-                                 plusOne={plusOne}
-                                 reset={reset}
-                                 disabledSet={disabledSet}
-                                 error={error}
-                                 min={min}
-                                 max={max}
-                        />
-                </div>
+        <div className={s.wrapper}>
+            <div className={s.App}>
+                <SetCounterRange minOnChangeHandler={minOnChangeHandler}
+                                 maxOnChangeHandler={maxOnChangeHandler}
+                                 onClickHandler={onSetHandler}
+                                 minValue={min}
+                                 maxValue={max}
+                                 disable={disabledSet}
+                />
+            </div>
+            <div className={s.App}>
+                <Counter count={count}
+                         plusOne={plusOne}
+                         reset={reset}
+                         disabledSet={disabledSet}
+                         error={error}
+                         min={min}
+                         max={max}
+                />
+            </div>
         </div>
     );
 }
