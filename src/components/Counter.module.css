@@ -37,12 +37,14 @@
     background-color: #7ca4a4;
     border: 5px solid #1e3434;
     border-radius: 10px;
-    font-size: 3.5em;
+    font-size: 4em;
     color: #1e3434;
     margin: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-weight: bold;
+
 }
 
 .redValueDisplay {
@@ -51,12 +53,12 @@
 }
 
 .enterValues {
-    font-size: 1em;
+    font-size: 2em;
     font-weight: bold;
 }
 
 .incorrectValue {
-    font-size: 1.5em;
+    font-size: 2em;
     font-weight: bold;
     color: red;
 }
