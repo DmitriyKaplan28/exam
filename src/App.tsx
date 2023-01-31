@@ -25,7 +25,6 @@ function App() {
         dispatch(setDisabledSetAndErrorAC(true, false))
     }
 
-
     useEffect(() => {
         if (settings.min < 0 || settings.max <= settings.min) {
             dispatch(setDisabledSetAndErrorAC(true, true))
